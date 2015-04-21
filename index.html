@@ -11,7 +11,7 @@
 		</div>
 		<div class='directions'>
 			<div class='col-md-6 text-center'>
-				<h1>I'm thinking of a number between 1 and 100...</h1>
+				<h2>I'm thinking of a number between 1 and 100...</h2>
 				<h2>Guess which one!!</h2>
 			</div>
 		</div>
@@ -19,11 +19,14 @@
 			<div class='col-md-6 text-center'>
 				<input type='text' name='guess'></input>
 				<input type='submit' name='submit' class='btn'></input>
+				<div class='text-center'>
+					<h3>You have 5 guesses to start</h3>
+					<h3>And {{guesses}} left!</h3>
+				</div>
 			</div>
 		</div>
-		<div class='text-center'>
-			<h3>You have 5 guesses to start</h3>
-			<h3>And {{guesses}} left!</h3>
+		<div class='col-md-12 numbers'>
+			<p class='text-center' ng-repeat="number in numbers">{{number}} (print numbers 1-100, then use addClass or something to highlight the number the user last put in)</p>
 		</div>
 	</body>
 </html>

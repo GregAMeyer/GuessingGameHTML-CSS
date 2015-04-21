@@ -1,1 +1,16 @@
-the styles sheet on top of bootstrap
+
+.col-md-6 {
+	border: 5px solid red; 
+
+}
+.game input {
+	margin-top: 16px;
+}
+.game .btn {
+	margin-top: 0px;
+}
+
+.numbers{
+	margin-top:20px;
+}
+
