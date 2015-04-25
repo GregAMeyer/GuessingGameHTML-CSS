@@ -3,6 +3,8 @@
 	<head>
 		<link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
 		<link href="css/styles.css" type="text/css" rel="stylesheet" />
+		<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+		<script src="js/app.js"></script>
 		<title>Greg Meyer Guessing Game Fullstack Foundations</title>
 	</head>
 	<body class='container container-fluid'>
@@ -17,11 +19,11 @@
 
 
 			<div class='game col-md-6 text-center'>
-				<input type='text' name='guess'></input>
-				<input type='submit' name='submit' class='btn'></input>
+				<input type='text' name='guess' class='field'></input>
+				<input type='submit' name='submit' class='btn submit'></input>
+				<input type='reset' name='reset' class='btn'></input>
 				<div class='text-center'>
-					<h3>You have 5 guesses to start</h3>
-					<h3>And {{guesses}} left!</h3>
+					<h3 class='rules'>You have 5 guesses to start</h3>
 				</div>
 			</div>
 
