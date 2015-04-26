@@ -12,18 +12,24 @@ $(document).ready(function () {
 		$('.numGuesses').replaceWith("<h3 class='numGuesses'>You have 5 guesses to start</h3>");
 	});
 
-	$('.submit').click(function clickSubmit(){
-			//count goes up each time submitted
-			count++;
-			
-			//the value in the input field
-			var $userInput = $('.field').val();
-			//the difference btwn the guess and the number, for comparison to 0 to get higher/lower
-			var $signDiff = $userInput - $randomNum;
-			//the absolute difference between the guess and the random number
-			var $absDiff = Math.abs($signDiff);
-			//logic for response on hot/cold, high/low
+	$('.hint').click(function clickHint(){
+		$('.field').val($randomNum)
+		$('.numGuesses').replaceWith("<h3 class='numGuesses'>The number was " + $randomNum + "</h3>")
+		$('.temp').replaceWith("<h3 class='temp'>Try the game!</h3>")
+	});
 
+	$('.submit').click(function clickSubmit(){
+		//count goes up each time submitted
+		count++;
+		
+		//the value in the input field
+		var $userInput = $('.field').val();
+		//the difference btwn the guess and the number, for comparison to 0 to get higher/lower
+		var $signDiff = $userInput - $randomNum;
+		//the absolute difference between the guess and the random number
+		var $absDiff = Math.abs($signDiff);
+		//logic for response on hot/cold, high/low
+		if($.isNumeric($userInput) && $userInput>0 && $userInput<101){
 			//replace the 5 guesses to start with number guesses left
 			$('.numGuesses').replaceWith("<h3 class='numGuesses'>You have "+(5-count)+" guesses left.</h3>");
 			//if guessed 5 times, tell them they're too slow
@@ -66,6 +72,10 @@ $(document).ready(function () {
 				$('.temp').replaceWith("<h3 class='temp'>You got the number!!!.<h3>")
 				$('.submit').hide()
 			}
-		});
+		}
+		else {
+			$('.temp').replaceWith("<h3 class='temp'>You need to choose a number between 1 and 100.<h3>")
+		}
+	});
 });
 
