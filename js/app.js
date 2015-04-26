@@ -15,16 +15,7 @@ $(document).ready(function () {
 	$('.submit').click(function clickSubmit(){
 			//count goes up each time submitted
 			count++;
-			//replace the 5 guesses to start with number guesses left
-			$('.numGuesses').replaceWith("<h3 class='numGuesses'>You have "+(5-count)+" guesses left.</h3>");
-			//if guessed 5 times, tell them they're too slow
-			if(count==5){
-				$('.numGuesses').append("<h3 class='tooSlow'>You're too slow! Try again by hitting reset.</h3>")
-				//hide the submit button
-				$('.submit').hide()
-				//remove any hot/cold high/low
-				$('.temp').hide()
-			}
+			
 			//the value in the input field
 			var $userInput = $('.field').val();
 			//the difference btwn the guess and the number, for comparison to 0 to get higher/lower
@@ -32,6 +23,18 @@ $(document).ready(function () {
 			//the absolute difference between the guess and the random number
 			var $absDiff = Math.abs($signDiff);
 			//logic for response on hot/cold, high/low
+
+			//replace the 5 guesses to start with number guesses left
+			$('.numGuesses').replaceWith("<h3 class='numGuesses'>You have "+(5-count)+" guesses left.</h3>");
+			//if guessed 5 times, tell them they're too slow
+			if(count==5 && $signDiff!==0){
+				$('.numGuesses').append("<h3 class='tooSlow'>You're too slow! Try again by hitting reset.</h3>")
+				//hide the submit button
+				$('.submit').hide()
+				//remove any hot/cold high/low
+				$('.temp').hide()
+			}
+
 			if($absDiff>25 && $signDiff>0 && count<5){
 				$('.temp').replaceWith("<h3 class='temp'>You're really cold and need to guess lower.<h3>")
 			}
@@ -61,6 +64,7 @@ $(document).ready(function () {
 			}
 			if($signDiff==0){
 				$('.temp').replaceWith("<h3 class='temp'>You got the number!!!.<h3>")
+				$('.submit').hide()
 			}
 		});
 });
