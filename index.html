@@ -4,32 +4,25 @@
 		<link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
 		<link href="css/styles.css" type="text/css" rel="stylesheet" />
 		<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-		<script src="js/app.js"></script>
+		<script src="js/app.js"></script> 
 		<title>Greg Meyer Guessing Game Fullstack Foundations</title>
 	</head>
 	<body class='container container-fluid'>
 		<div class='navbar'>
 			<h1 class='text-center'>THE GUESSING GAME</h1>
 		</div>
-
 			<div class='directions col-md-6 text-center'>
 				<h2>I'm thinking of a number between 1 and 100...</h2>
 				<h2>Guess which one!!</h2>
 			</div>
-
-
 			<div class='game col-md-6 text-center'>
 				<input type='text' name='guess' class='field'></input>
 				<input type='submit' name='submit' class='btn submit'></input>
-				<input type='reset' name='reset' class='btn'></input>
+				<input type='reset' name='reset' class='btn reset'></input>
 				<div class='rules text-center'>
 					<h3 class='numGuesses'>You have 5 guesses to start</h3>
 					<h3 class='temp'>Go ahead and try!</h3>
 				</div>
 			</div>
-
-		<div class='col-md-12 numbers'>
-			<p class='text-center' ng-repeat="number in numbers">{{number}} (print numbers 1-100, then use addClass or something to highlight the number the user last put in)</p>
-		</div>
 	</body>
 </html>
