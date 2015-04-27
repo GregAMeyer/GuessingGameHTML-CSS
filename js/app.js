@@ -2,6 +2,7 @@ $(document).ready(function () {
 	//generate a number between 1-100
 	var $randomNum = Math.floor((Math.random() * 100) + 1);
 	var count = 0;
+	var $guesses = [];
 
 	$('.reset').click(function clickReset(){
 		count = 0;
@@ -10,6 +11,7 @@ $(document).ready(function () {
 		$('.tooSlow').remove();
 		$('.temp').hide();
 		$('.numGuesses').replaceWith("<h3 class='numGuesses'>You have 5 guesses to start</h3>");
+		$guesses = [];
 	});
 
 	$('.hint').click(function clickHint(){
@@ -21,13 +23,17 @@ $(document).ready(function () {
 	$('.submit').click(function clickSubmit(){
 		//count goes up each time submitted
 		count++;
-		
 		//the value in the input field
 		var $userInput = $('.field').val();
 		//the difference btwn the guess and the number, for comparison to 0 to get higher/lower
 		var $signDiff = $userInput - $randomNum;
 		//the absolute difference between the guess and the random number
 		var $absDiff = Math.abs($signDiff);
+		//push guess into array to keep track
+		$guesses.push($userInput);
+		if($guesses[0]){
+			$('temp').append("<h4>You've guessed "+$guesses.toString()+" so far</h3>")
+		}
 		//logic for response on hot/cold, high/low
 		if($.isNumeric($userInput) && $userInput>0 && $userInput<101){
 			//replace the 5 guesses to start with number guesses left
