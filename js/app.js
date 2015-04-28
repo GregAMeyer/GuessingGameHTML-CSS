@@ -9,15 +9,18 @@ $(document).ready(function () {
 		$randomNum = Math.floor((Math.random() * 100) + 1);
 		$('.submit').show();
 		$('.tooSlow').remove();
-		$('.temp').hide();
+		$('.temp').replaceWith("<h3 class='temp'>Go ahead and try!</h3>");
 		$('.numGuesses').replaceWith("<h3 class='numGuesses'>You have 5 guesses to start</h3>");
 		$guesses = [];
+		$('.guesses').replaceWith("<h4 class='guesses'></h4>")
+		$('.tempChange').replaceWtih("<h3 class='tempChange'></h3>")
 	});
 
 	$('.hint').click(function clickHint(){
 		$('.field').val($randomNum)
 		$('.numGuesses').replaceWith("<h3 class='numGuesses'>The number was " + $randomNum + "</h3>")
 		$('.temp').replaceWith("<h3 class='temp'>Try the game!</h3>")
+		$('.tempChange').replaceWtih("<h3 class='tempChange'></h3>")
 	});
 
 	$('.submit').click(function clickSubmit(){
@@ -31,8 +34,8 @@ $(document).ready(function () {
 		var $absDiff = Math.abs($signDiff);
 		//push guess into array to keep track
 		$guesses.push($userInput);
-		if($guesses[0]){
-			$('temp').append("<h4>You've guessed "+$guesses.toString()+" so far</h3>")
+		if($guesses[0]>0){
+			$('.guesses').replaceWith("<h4 class='guesses'>You've guessed "+$guesses.toString()+" so far</h3>")
 		}
 		//logic for response on hot/cold, high/low
 		if($.isNumeric($userInput) && $userInput>0 && $userInput<101){
@@ -46,7 +49,6 @@ $(document).ready(function () {
 				//remove any hot/cold high/low
 				$('.temp').hide()
 			}
-
 			if($absDiff>25 && $signDiff>0 && count<5){
 				$('.temp').replaceWith("<h3 class='temp'>You're really cold and need to guess lower.<h3>")
 			}
@@ -77,6 +79,13 @@ $(document).ready(function () {
 			if($signDiff==0){
 				$('.temp').replaceWith("<h3 class='temp'>You got the number!!!.<h3>")
 				$('.submit').hide()
+				$('.guesses').replaceWith("<h4 class='guesses'></h4>")
+			}
+			if(Math.abs($randomNum - $guesses[$guesses.length-1]) > Math.abs($randomNum - $userInput)){
+				$('.tempChange').replaceWtih("<h3 class='tempChange'>You're getting HOTTER!</h3>")
+			}
+			if(Math.abs($randomNum - $guesses[$guesses.length-1]) < Math.abs($randomNum - $userInput)){
+				$('.tempChange').replaceWtih("<h3 class='tempChange'>You're getting COLDER!</h3>")
 			}
 		}
 		else {
