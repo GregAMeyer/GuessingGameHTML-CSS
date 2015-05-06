@@ -14,6 +14,7 @@ $(document).ready(function () {
 		$guesses = [];
 		$('.guesses').replaceWith("<h4 class='guesses'></h4>")
 		$('.tempChange').replaceWtih("<h3 class='tempChange'></h3>")
+		$('.repeat').replaceWith("<h4 class='repeat'><h4>")
 	});
 
 	$('.hint').click(function clickHint(){
@@ -34,10 +35,30 @@ $(document).ready(function () {
 		var $absDiff = Math.abs($signDiff);
 		//push guess into array to keep track
 		$guesses.push($userInput);
-		if($guesses[0]>0){
-			$('.guesses').replaceWith("<h4 class='guesses'>You've guessed "+$guesses.toString()+" so far</h3>")
+		
+		//show what $guesses contains, a string of numbers guessed so far
+		$('.guesses').replaceWith("<h4 class='guesses'>You've guessed "+$guesses.toString()+" so far.</h3>")
+		
+		//if the last element in the array (most recent guess) is a repeat 
+		// --if the rest of the guesses array contains the guess, say its a repeat
+		
+		if($userInput.indexOf($guesses.slice(0,guesses.length-2))>-1){
+			$('.repeat').replaceWith("<h4 class='repeat'>That's a repeat! Oh No!</h4>")
 		}
-		//logic for response on hot/cold, high/low
+		/*
+		//hotter or colder compared to last guess logic
+		if(Math.abs($randomNum - $guesses[$guesses.length-1]) > Math.abs($randomNum - $userInput)){
+			$('.tempChange').replaceWtih("<h3 class='tempChange'>You're getting HOTTER!</h3>")
+		}
+		if(Math.abs($randomNum - $guesses[$guesses.length-1]) < Math.abs($randomNum - $userInput)){
+			$('.tempChange').replaceWtih("<h3 class='tempChange'>You're getting COLDER!</h3>")
+		}
+		*/
+		
+		//trying to figure out why the hotter/colder and repeat logic doesn't work
+		//it also stops the hot/cold high/low logic from working
+		
+		//if the guess is a real number between 1-100
 		if($.isNumeric($userInput) && $userInput>0 && $userInput<101){
 			//replace the 5 guesses to start with number guesses left
 			$('.numGuesses').replaceWith("<h3 class='numGuesses'>You have "+(5-count)+" guesses left.</h3>");
@@ -49,6 +70,7 @@ $(document).ready(function () {
 				//remove any hot/cold high/low
 				$('.temp').hide()
 			}
+			//logic for response on hot/cold, high/low
 			if($absDiff>25 && $signDiff>0 && count<5){
 				$('.temp').replaceWith("<h3 class='temp'>You're really cold and need to guess lower.<h3>")
 			}
@@ -80,12 +102,6 @@ $(document).ready(function () {
 				$('.temp').replaceWith("<h3 class='temp'>You got the number!!!.<h3>")
 				$('.submit').hide()
 				$('.guesses').replaceWith("<h4 class='guesses'></h4>")
-			}
-			if(Math.abs($randomNum - $guesses[$guesses.length-1]) > Math.abs($randomNum - $userInput)){
-				$('.tempChange').replaceWtih("<h3 class='tempChange'>You're getting HOTTER!</h3>")
-			}
-			if(Math.abs($randomNum - $guesses[$guesses.length-1]) < Math.abs($randomNum - $userInput)){
-				$('.tempChange').replaceWtih("<h3 class='tempChange'>You're getting COLDER!</h3>")
 			}
 		}
 		else {
