@@ -16,13 +16,34 @@ $(document).ready(function () {
 		$('.tempChange').replaceWtih("<h3 class='tempChange'></h3>")
 		$('.repeat').replaceWith("<h4 class='repeat'><h4>")
 	});
-
 	$('.hint').click(function clickHint(){
 		$('.field').val($randomNum)
 		$('.numGuesses').replaceWith("<h3 class='numGuesses'>The number was " + $randomNum + "</h3>")
 		$('.temp').replaceWith("<h3 class='temp'>Try the game!</h3>")
 		$('.tempChange').replaceWtih("<h3 class='tempChange'></h3>")
 	});
+
+	//check if the last element in the array (most recent guess) is a repeat 
+	function checkRepeat(guess, array){
+		if(guess.indexOf(array)>-1){
+			$('.repeat').replaceWith("<h4 class='repeat'>That's a repeat! Oh No!</h4>")
+		}
+		else console.log("no repeat")
+	}
+	//hotter or colder compared to last guess logic
+	function hotterColder(guess, array){
+		var lastGuess = array[array.length-2];
+		var lastGuessDiff = $randomNum - lastGuess;
+		var thisGuessDiff = $randomNum - guess;
+		if(Math.abs(lastGuessDiff) > Math.abs(thisGuessDiff)){
+			$('.tempChange').replaceWtih("<h3 class='tempChange'>You're getting HOTTER!</h3>")
+			console.log('hotter')
+		}
+		if(Math.abs(lastGuessDiff) < Math.abs(thisGuessDiff)){
+			$('.tempChange').replaceWtih("<h3 class='tempChange'>You're getting COLDER!</h3>")
+			console.log('colder')
+		}
+	}
 
 	$('.submit').click(function clickSubmit(){
 		//count goes up each time submitted
@@ -35,28 +56,8 @@ $(document).ready(function () {
 		var $absDiff = Math.abs($signDiff);
 		//push guess into array to keep track
 		$guesses.push($userInput);
-		
 		//show what $guesses contains, a string of numbers guessed so far
 		$('.guesses').replaceWith("<h4 class='guesses'>You've guessed "+$guesses.toString()+" so far.</h3>")
-		
-		//if the last element in the array (most recent guess) is a repeat 
-		// --if the rest of the guesses array contains the guess, say its a repeat
-		
-		if($userInput.indexOf($guesses.slice(0,guesses.length-2))>-1){
-			$('.repeat').replaceWith("<h4 class='repeat'>That's a repeat! Oh No!</h4>")
-		}
-		/*
-		//hotter or colder compared to last guess logic
-		if(Math.abs($randomNum - $guesses[$guesses.length-1]) > Math.abs($randomNum - $userInput)){
-			$('.tempChange').replaceWtih("<h3 class='tempChange'>You're getting HOTTER!</h3>")
-		}
-		if(Math.abs($randomNum - $guesses[$guesses.length-1]) < Math.abs($randomNum - $userInput)){
-			$('.tempChange').replaceWtih("<h3 class='tempChange'>You're getting COLDER!</h3>")
-		}
-		*/
-		
-		//trying to figure out why the hotter/colder and repeat logic doesn't work
-		//it also stops the hot/cold high/low logic from working
 		
 		//if the guess is a real number between 1-100
 		if($.isNumeric($userInput) && $userInput>0 && $userInput<101){
@@ -107,6 +108,8 @@ $(document).ready(function () {
 		else {
 			$('.temp').replaceWith("<h3 class='temp'>You need to choose a number between 1 and 100.<h3>")
 		}
+		checkRepeat($userInput, $guesses.slice(0,($guesses.length-2)));
+		hotterColder($userInput, $guesses);
 	});
 });
 
