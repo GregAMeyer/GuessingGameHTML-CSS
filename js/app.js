@@ -4,19 +4,20 @@ $(document).ready(function () {
 	var count = 0;
 	var $guesses = [];
 
-	$('.reset').click(function clickReset(){
+	$('.reset').click(function(){
 		count = 0;
 		$randomNum = Math.floor((Math.random() * 100) + 1);
 		$('.submit').show();
 		$('.tooSlow').remove();
 		$('.temp').replaceWith("<h3 class='temp'>Go ahead and try!</h3>");
 		$('.numGuesses').replaceWith("<h3 class='numGuesses'>You have 5 guesses to start</h3>");
+		$('.guesses').replaceWith("<h4 class='guesses'></h4>");
 		$guesses = [];
-		$('.guesses').replaceWith("<h4 class='guesses'></h4>")
-		$('.tempChange').replaceWtih("<h3 class='tempChange'></h3>")
-		$('.repeat').replaceWith("<h4 class='repeat'><h4>")
+		$('.tempChange').replaceWtih("<h3 class='tempChange'></h3>");
+		//why doesn't this reseting of 'repeat' work?
+		$('.repeat').replaceWith("<h4 class='repeat'></h4>");
 	});
-	$('.hint').click(function clickHint(){
+	$('.hint').click(function(){
 		$('.field').val($randomNum)
 		$('.numGuesses').replaceWith("<h3 class='numGuesses'>The number was " + $randomNum + "</h3>")
 		$('.temp').replaceWith("<h3 class='temp'>Try the game!</h3>")
@@ -25,11 +26,11 @@ $(document).ready(function () {
 
 	//check if the last element in the array (most recent guess) is a repeat 
 	function checkRepeat(guess, array){
-		if(guess.indexOf(array)>-1){
-			$('.repeat').replaceWith("<h4 class='repeat'>That's a repeat! Oh No!</h4>")
+		if(guess.indexOf(array)>0){
+			$('.repeat').replaceWith("<h4 class='repeat'>That's a repeat! Idk why reset doesnt get rid of this.</h4>")
 		}
 		else console.log("no repeat")
-	}
+	};
 	//hotter or colder compared to last guess logic
 	function hotterColder(guess, array){
 		var lastGuess = array[array.length-2];
@@ -57,7 +58,7 @@ $(document).ready(function () {
 		//push guess into array to keep track
 		$guesses.push($userInput);
 		//show what $guesses contains, a string of numbers guessed so far
-		$('.guesses').replaceWith("<h4 class='guesses'>You've guessed "+$guesses.toString()+" so far.</h3>")
+		$('.guesses').replaceWith("<h4 class='guesses'>Your guesses: "+ $guesses +"</h3>")
 		
 		//if the guess is a real number between 1-100
 		if($.isNumeric($userInput) && $userInput>0 && $userInput<101){
