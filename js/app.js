@@ -17,8 +17,7 @@ $(document).ready(function () {
 		$('.tempChange').replaceWith("<h3 class='tempChange'></h3>");
 		$('.guesses').replaceWith("<h4 class='guesses'></h4>");
 		$('.repeat').replaceWith("<h4 class='repeat'></h4>");
-		//reset anything else that happened during submit click function
-		$('.tooSlow').hide()
+		$('.tooSlow').replaceWith("<h3 class='tooSlow'></h3>")
 
 	});
 	$('.hint').click(function(){
@@ -30,13 +29,15 @@ $(document).ready(function () {
 
 	//check if the last element in the array (most recent guess) is a repeat 
 	function checkRepeat(guess, array){
-		if(guessesArr.length>2){
-			if(guess.indexOf(array)>-1){
-			$('.repeat').replaceWith("<h4 class='repeat'>That's a repeat!</h4>")
-		}
-		else {
-			$('.repeat').replaceWith("<h4 class='repeat'></h4>")
-		}
+		//check only previous guesses
+		//by slicing the most recent guess off the array
+		//but only in this function
+		array = array.slice(0,(array.length-1));
+		//array must have a guess in it to compare to most recent guess
+		if(array.length>0){
+			if(array.indexOf(guess)>-1){
+				$('.repeat').replaceWith("<h4 class='repeat'>That's a repeat!</h4>")
+			}
 		}
 	};
 	//hotter or colder compared to last guess logic
@@ -74,7 +75,7 @@ $(document).ready(function () {
 			$('.numGuesses').replaceWith("<h3 class='numGuesses'>You have "+(5-count)+" guesses left.</h3>");
 			//if guessed 5 times, tell them they're too slow
 			if(count==5 && signDiff!==0){
-				$('.tooSlow').show();
+				$('.tooSlow').replaceWith("<h3 class='tooSlow'>You're too slow! Try again by hitting reset.</h3>");
 				//hide the submit button
 				$('.submit').hide()
 				//remove any hot/cold high/low
@@ -109,6 +110,8 @@ $(document).ready(function () {
 				$('.temp').replaceWith("<h3 class='temp'>You're hot and need to guess higher.<h3>")
 			}
 			if(signDiff==0){
+				$('.tooSlow').replaceWith("<h3 class='tooSlow'></h3>")
+				$('.tempChange').replaceWith("<h3 class='tempChange'></h3>")
 				$('.temp').replaceWith("<h3 class='temp'>You got the number!!!.<h3>")
 				$('.submit').hide()
 				$('.guesses').replaceWith("<h4 class='guesses'></h4>")
@@ -117,7 +120,7 @@ $(document).ready(function () {
 		else {
 			$('.temp').replaceWith("<h3 class='temp'>You need to choose a number between 1 and 100.<h3>")
 		}
-		checkRepeat($userInput, guessesArr.slice(0,(guessesArr.length-2)));
+		checkRepeat($userInput, guessesArr);
 		hotterColder($userInput, guessesArr);
 	});
 });
