@@ -3,7 +3,7 @@ $(document).ready(function () {
 	var randomNum = Math.floor((Math.random() * 100) + 1);
 	var count = 0;
 	var guessesArr = [];
-
+	//reset and hint button functionality
 	$('.reset').click(function(){
 		//reset beginning variables
 		randomNum = Math.floor((Math.random() * 100) + 1);
@@ -18,7 +18,6 @@ $(document).ready(function () {
 		$('.guesses').replaceWith("<h4 class='guesses'></h4>");
 		$('.repeat').replaceWith("<h4 class='repeat'></h4>");
 		$('.tooSlow').replaceWith("<h3 class='tooSlow'></h3>")
-
 	});
 	$('.hint').click(function(){
 		$('.field').val(randomNum)
@@ -26,7 +25,6 @@ $(document).ready(function () {
 		$('.temp').replaceWith("<h3 class='temp'>Try the game!</h3>")
 		$('.tempChange').replaceWith("<h3 class='tempChange'></h3>")
 	});
-
 	//check if the last element in the array (most recent guess) is a repeat 
 	function checkRepeat(guess, array){
 		//check only previous guesses
@@ -38,6 +36,9 @@ $(document).ready(function () {
 			if(array.indexOf(guess)>-1){
 				$('.repeat').replaceWith("<h4 class='repeat'>That's a repeat!</h4>")
 			}
+			else {
+				$('.repeat').replaceWith("<h4 class='repeat'></h4>")	
+			}
 		}
 	};
 	//hotter or colder compared to last guess logic
@@ -45,13 +46,11 @@ $(document).ready(function () {
 		var lastGuess = array[array.length-2];
 		var lastGuessDiff = randomNum - lastGuess;
 		var thisGuessDiff = randomNum - guess;
-		if(Math.abs(lastGuessDiff) > Math.abs(thisGuessDiff)){
+		if(Math.abs(lastGuessDiff) > Math.abs(thisGuessDiff) && count!=5){
 			$('.tempChange').replaceWith("<h3 class='tempChange'>You're getting HOTTER!</h3>")
-			console.log('hotter')
 		}
-		if(Math.abs(lastGuessDiff) < Math.abs(thisGuessDiff)){
+		if(Math.abs(lastGuessDiff) < Math.abs(thisGuessDiff) && count!=5){
 			$('.tempChange').replaceWith("<h3 class='tempChange'>You're getting COLDER!</h3>")
-			console.log('colder')
 		}
 	}
 
@@ -79,7 +78,8 @@ $(document).ready(function () {
 				//hide the submit button
 				$('.submit').hide()
 				//remove any hot/cold high/low
-				$('.temp').hide()
+				$('.temp').replaceWith("<h3 class='temp'></h3>")
+				$('.tempChange').replaceWith("<h3 class='tempChange'></h3>")
 			}
 			//logic for response on hot/cold, high/low
 			if(absoluteDiff>25 && signDiff>0 && count<5){
