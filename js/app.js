@@ -123,5 +123,12 @@ $(document).ready(function () {
 		checkRepeat($userInput, guessesArr);
 		hotterColder($userInput, guessesArr);
 	});
+
+	$('body').keypress(function (e) {
+  		if (e.which == 13) {
+    		$('.submit').click();
+    		//return false;    //<---- Add this line
+  		}
+	});
 });
 
