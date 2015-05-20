@@ -67,6 +67,7 @@ $(document).ready(function () {
 		//push guess into array to keep track
 //how do i clear the input field without clearning the value?
 //would be better if user didn't have to delete their last guess
+//how do i use git with two branches 
 		guessesArr.push($userInput);
 		//show what guessesArr contains, a string of numbers guessed so far
 		$('.guesses').replaceWith("<h4 class='guesses'>Your guesses: "+ guessesArr +"</h3>")
