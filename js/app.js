@@ -46,10 +46,10 @@ $(document).ready(function () {
 		var lastGuess = array[array.length-2];
 		var lastGuessDiff = randomNum - lastGuess;
 		var thisGuessDiff = randomNum - guess;
-		if(Math.abs(lastGuessDiff) > Math.abs(thisGuessDiff) && count!=5){
+		if(Math.abs(lastGuessDiff) > Math.abs(thisGuessDiff) && count!=5 && thisGuessDiff!==0){
 			$('.tempChange').replaceWith("<h3 class='tempChange'>You're getting HOTTER!</h3>")
 		}
-		if(Math.abs(lastGuessDiff) < Math.abs(thisGuessDiff) && count!=5){
+		if(Math.abs(lastGuessDiff) < Math.abs(thisGuessDiff) && count!=5 && thisGuessDiff!==0){
 			$('.tempChange').replaceWith("<h3 class='tempChange'>You're getting COLDER!</h3>")
 		}
 	}
