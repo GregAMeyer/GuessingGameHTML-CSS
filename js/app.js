@@ -17,7 +17,8 @@ $(document).ready(function () {
 		$('.tempChange').replaceWith("<h3 class='tempChange'></h3>");
 		$('.guesses').replaceWith("<h4 class='guesses'></h4>");
 		$('.repeat').replaceWith("<h4 class='repeat'></h4>");
-		$('.tooSlow').replaceWith("<h3 class='tooSlow'></h3>")
+		$('.tooSlow').replaceWith("<h3 class='tooSlow'></h3>");
+		$( 'body' ).css( "background-color", "#E2E2CA" )
 	});
 	$('.hint').click(function(){
 		$('.field').val(randomNum)
@@ -115,6 +116,7 @@ $(document).ready(function () {
 				$('.temp').replaceWith("<h3 class='temp'>You got the number!!!.<h3>")
 				$('.submit').hide()
 				$('.guesses').replaceWith("<h4 class='guesses'></h4>")
+				$( 'body' ).css( "background-color", "#A3FFA3" )
 			}
 		}
 		else {
