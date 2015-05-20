@@ -1,20 +1,29 @@
 
 body {
-	background: #CCD6CC;
-	font-family: 'Merriweather Sans';
+	font-family: 'Gloria Hallelujah', cursive;
+	color: #191919;
+	background-color: #E2E2CA;
 }
 .title {
-	color: #196219;
+	color: #336C33;
+	font-size: 52px;
 }
 .col-md-6{
+	border-style: ridge;
+	border-width: 25px;
+	border-color: #664019;
+	border-bottom: double gray 5px;
+	margin-top: 30px;
 	padding-top: 30px;
 	padding-bottom: 100px;
-	height: 300px;
-	background: white;
+	height: 340px;
+	background: #1D2F2F;
+	color: #BCCCAE;
 }
 
 .game {
-	box-shadow: 5px 10px 15px #196219;
+	box-shadow: 5px 10px 15px #161F26;
+	border-radius: 15px;
 	-webkit-transform: value;
   	-moz-transform:    value;
   	-ms-transform:     value;
@@ -23,7 +32,8 @@ body {
 
 }
 .directions {
-	box-shadow: -5px 10px 15px #196219;
+	box-shadow: -5px 10px 15px #161F26;
+	border-radius: 15px;
 	-webkit-transform: value;
   	-moz-transform:    value;
   	-ms-transform:     value;
@@ -31,15 +41,26 @@ body {
   	transform: perspective( 1400px ) rotateY( 25deg );
 }
 .game input {
-	margin-top: 16px;
+	margin-top: -5px;
+	font-size: 16px;
+	padding:8px;
+	background-color: #1D2F2F;
 }
 .game .btn {
-	margin-top: 0px;
-	background-color: #196219;
-	color: white;
+	margin-top: -4px;
+	border-style: solid;
+	border-color: #BCCCAE;
+	border-width: 5px;
+	color: #BCCCAE;
+	background-color: #1D2F2F;
+	padding: 10px;
 }
-
+input .field {
+	padding-top: 50px;
+}
 .numbers{
 	margin-top:20px;
 }
 
+use media queries to undo the transform when screen shinks and
+divs get put on top of each other
