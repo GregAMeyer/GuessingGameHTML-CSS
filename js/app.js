@@ -1,5 +1,4 @@
 $(document).ready(function () {
-	alert("Hello World");
 	//generate a number between 1-100
 	var randomNum = Math.floor((Math.random() * 100) + 1);
 	var count = 0;
